@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POCRCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="POCRCEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ComponentSystemGroupCodes" EntityType="POCRCModel.ComponentSystemGroupCode" />
+    <EntitySet Name="DialectTexts" EntityType="POCRCModel.DialectText" />
+    <EntitySet Name="LanguageDialects" EntityType="POCRCModel.LanguageDialect" />
+    <EntitySet Name="Releases" EntityType="POCRCModel.Release" />
+    <EntitySet Name="ReleaseComponents" EntityType="POCRCModel.ReleaseComponent" />
+    <EntitySet Name="ReleaseNotes" EntityType="POCRCModel.ReleaseNote" />
+    <EntitySet Name="ReleaseNoteTypes" EntityType="POCRCModel.ReleaseNoteType" />
+    <EntitySet Name="ReleaseTypes" EntityType="POCRCModel.ReleaseType" />
+    <EntitySet Name="SystemGroups" EntityType="POCRCModel.SystemGroup" />
+    <EntitySet Name="TextReferences" EntityType="POCRCModel.TextReference" />
+    <AssociationSet Name="fkDialectTextXLanguageDialect" Association="POCRCModel.fkDialectTextXLanguageDialect">
+      <End Role="LanguageDialect" EntitySet="LanguageDialects" />
+      <End Role="DialectText" EntitySet="DialectTexts" />
+    </AssociationSet>
+    <AssociationSet Name="fkDialectTextXTextReference" Association="POCRCModel.fkDialectTextXTextReference">
+      <End Role="TextReference" EntitySet="TextReferences" />
+      <End Role="DialectText" EntitySet="DialectTexts" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseComponentXSoftwareRelease" Association="POCRCModel.fkSoftwareReleaseComponentXSoftwareRelease">
+      <End Role="Release" EntitySet="Releases" />
+      <End Role="ReleaseComponent" EntitySet="ReleaseComponents" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseNoteXSoftwareRelease" Association="POCRCModel.fkSoftwareReleaseNoteXSoftwareRelease">
+      <End Role="Release" EntitySet="Releases" />
+      <End Role="ReleaseNote" EntitySet="ReleaseNotes" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseXSoftwareReleaseType" Association="POCRCModel.fkSoftwareReleaseXSoftwareReleaseType">
+      <End Role="ReleaseType" EntitySet="ReleaseTypes" />
+      <End Role="Release" EntitySet="Releases" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseNoteXSoftwareReleaseNoteType" Association="POCRCModel.fkSoftwareReleaseNoteXSoftwareReleaseNoteType">
+      <End Role="ReleaseNoteType" EntitySet="ReleaseNoteTypes" />
+      <End Role="ReleaseNote" EntitySet="ReleaseNotes" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseNoteXTextReference" Association="POCRCModel.fkSoftwareReleaseNoteXTextReference">
+      <End Role="TextReference" EntitySet="TextReferences" />
+      <End Role="ReleaseNote" EntitySet="ReleaseNotes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ComponentSystemGroupCode">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SystemGroupCode" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="ComponentGroupCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DialectText">
+    <Key>
+      <PropertyRef Name="MicrosoftLocaleID" />
+      <PropertyRef Name="TextID" />
+    </Key>
+    <Property Name="MicrosoftLocaleID" Type="Int32" Nullable="false" />
+    <Property Name="TextID" Type="Int32" Nullable="false" />
+    <Property Name="LanguageText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ModificationDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedbyDatabaseLoginName" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="LanguageDialect" Relationship="POCRCModel.fkDialectTextXLanguageDialect" FromRole="DialectText" ToRole="LanguageDialect" />
+    <NavigationProperty Name="TextReference" Relationship="POCRCModel.fkDialectTextXTextReference" FromRole="DialectText" ToRole="TextReference" />
+  </EntityType>
+  <EntityType Name="LanguageDialect">
+    <Key>
+      <PropertyRef Name="MicrosoftLocaleID" />
+    </Key>
+    <Property Name="MicrosoftLocaleID" Type="Int32" Nullable="false" />
+    <Property Name="MicrosoftLocaleDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DialectTexts" Relationship="POCRCModel.fkDialectTextXLanguageDialect" FromRole="LanguageDialect" ToRole="DialectText" />
+  </EntityType>
+  <EntityType Name="Release">
+    <Key>
+      <PropertyRef Name="ReleaseID" />
+    </Key>
+    <Property Name="ReleaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SystemGroupCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="ReleaseCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ModelYear" Type="Int16" />
+    <Property Name="VersionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReleaseTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ConnectCapableIndicator" Type="Boolean" Nullable="false" />
+    <Property Name="MinimumConnectClientVersion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedUserName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ActiveIndicator" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ReleaseComponents" Relationship="POCRCModel.fkSoftwareReleaseComponentXSoftwareRelease" FromRole="Release" ToRole="ReleaseComponent" />
+    <NavigationProperty Name="ReleaseNotes" Relationship="POCRCModel.fkSoftwareReleaseNoteXSoftwareRelease" FromRole="Release" ToRole="ReleaseNote" />
+    <NavigationProperty Name="ReleaseType" Relationship="POCRCModel.fkSoftwareReleaseXSoftwareReleaseType" FromRole="Release" ToRole="ReleaseType" />
+  </EntityType>
+  <EntityType Name="ReleaseComponent">
+    <Key>
+      <PropertyRef Name="ComponentGroupCode" />
+      <PropertyRef Name="ReleaseID" />
+      <PropertyRef Name="ComponentNumber" />
+    </Key>
+    <Property Name="ComponentGroupCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="ReleaseID" Type="Int32" Nullable="false" />
+    <Property Name="ComponentNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ComponentNumberSpecWeek" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="ReleaseDerivationIndicator" Type="Boolean" Nullable="false" />
+    <Property Name="LastModifiedUserName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Release" Relationship="POCRCModel.fkSoftwareReleaseComponentXSoftwareRelease" FromRole="ReleaseComponent" ToRole="Release" />
+  </EntityType>
+  <EntityType Name="ReleaseNote">
+    <Key>
+      <PropertyRef Name="ReleaseID" />
+      <PropertyRef Name="ReleaseNoteTypeCode" />
+      <PropertyRef Name="ReleaseNoteTextID" />
+    </Key>
+    <Property Name="ReleaseID" Type="Int32" Nullable="false" />
+    <Property Name="ReleaseNoteTypeCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="ReleaseNoteTextID" Type="Int32" Nullable="false" />
+    <Property Name="LastModifiedUserName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Release" Relationship="POCRCModel.fkSoftwareReleaseNoteXSoftwareRelease" FromRole="ReleaseNote" ToRole="Release" />
+    <NavigationProperty Name="ReleaseNoteType" Relationship="POCRCModel.fkSoftwareReleaseNoteXSoftwareReleaseNoteType" FromRole="ReleaseNote" ToRole="ReleaseNoteType" />
+    <NavigationProperty Name="TextReference" Relationship="POCRCModel.fkSoftwareReleaseNoteXTextReference" FromRole="ReleaseNote" ToRole="TextReference" />
+  </EntityType>
+  <EntityType Name="ReleaseNoteType">
+    <Key>
+      <PropertyRef Name="ReleaseNoteTypeCode" />
+    </Key>
+    <Property Name="ReleaseNoteTypeCode" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="ReleaseNoteTypeDescription" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ReleaseNotes" Relationship="POCRCModel.fkSoftwareReleaseNoteXSoftwareReleaseNoteType" FromRole="ReleaseNoteType" ToRole="ReleaseNote" />
+  </EntityType>
+  <EntityType Name="ReleaseType">
+    <Key>
+      <PropertyRef Name="ReleaseTypeID" />
+    </Key>
+    <Property Name="ReleaseTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReleaseTypeName" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Releases" Relationship="POCRCModel.fkSoftwareReleaseXSoftwareReleaseType" FromRole="ReleaseType" ToRole="Release" />
+  </EntityType>
+  <EntityType Name="SystemGroup">
+    <Key>
+      <PropertyRef Name="SystemGroupIdentifier" />
+    </Key>
+    <Property Name="SystemGroupIdentifier" Type="Int32" Nullable="false" />
+    <Property Name="SystemGroupCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TextReference">
+    <Key>
+      <PropertyRef Name="TextID" />
+    </Key>
+    <Property Name="TextID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="DialectTexts" Relationship="POCRCModel.fkDialectTextXTextReference" FromRole="TextReference" ToRole="DialectText" />
+    <NavigationProperty Name="ReleaseNotes" Relationship="POCRCModel.fkSoftwareReleaseNoteXTextReference" FromRole="TextReference" ToRole="ReleaseNote" />
+  </EntityType>
+  <Association Name="fkDialectTextXLanguageDialect">
+    <End Type="POCRCModel.LanguageDialect" Role="LanguageDialect" Multiplicity="1" />
+    <End Type="POCRCModel.DialectText" Role="DialectText" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageDialect">
+        <PropertyRef Name="MicrosoftLocaleID" />
+      </Principal>
+      <Dependent Role="DialectText">
+        <PropertyRef Name="MicrosoftLocaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDialectTextXTextReference">
+    <End Type="POCRCModel.TextReference" Role="TextReference" Multiplicity="1" />
+    <End Type="POCRCModel.DialectText" Role="DialectText" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TextReference">
+        <PropertyRef Name="TextID" />
+      </Principal>
+      <Dependent Role="DialectText">
+        <PropertyRef Name="TextID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseComponentXSoftwareRelease">
+    <End Type="POCRCModel.Release" Role="Release" Multiplicity="1" />
+    <End Type="POCRCModel.ReleaseComponent" Role="ReleaseComponent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Release">
+        <PropertyRef Name="ReleaseID" />
+      </Principal>
+      <Dependent Role="ReleaseComponent">
+        <PropertyRef Name="ReleaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseNoteXSoftwareRelease">
+    <End Type="POCRCModel.Release" Role="Release" Multiplicity="1" />
+    <End Type="POCRCModel.ReleaseNote" Role="ReleaseNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Release">
+        <PropertyRef Name="ReleaseID" />
+      </Principal>
+      <Dependent Role="ReleaseNote">
+        <PropertyRef Name="ReleaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseXSoftwareReleaseType">
+    <End Type="POCRCModel.ReleaseType" Role="ReleaseType" Multiplicity="1" />
+    <End Type="POCRCModel.Release" Role="Release" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReleaseType">
+        <PropertyRef Name="ReleaseTypeID" />
+      </Principal>
+      <Dependent Role="Release">
+        <PropertyRef Name="ReleaseTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseNoteXSoftwareReleaseNoteType">
+    <End Type="POCRCModel.ReleaseNoteType" Role="ReleaseNoteType" Multiplicity="1" />
+    <End Type="POCRCModel.ReleaseNote" Role="ReleaseNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReleaseNoteType">
+        <PropertyRef Name="ReleaseNoteTypeCode" />
+      </Principal>
+      <Dependent Role="ReleaseNote">
+        <PropertyRef Name="ReleaseNoteTypeCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseNoteXTextReference">
+    <End Type="POCRCModel.TextReference" Role="TextReference" Multiplicity="1" />
+    <End Type="POCRCModel.ReleaseNote" Role="ReleaseNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TextReference">
+        <PropertyRef Name="TextID" />
+      </Principal>
+      <Dependent Role="ReleaseNote">
+        <PropertyRef Name="ReleaseNoteTextID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

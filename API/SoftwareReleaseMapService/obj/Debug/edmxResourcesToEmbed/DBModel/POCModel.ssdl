@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POCRCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'POCRC.dbo.ComponentSystemGroupCode' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ComponentSystemGroupCode">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="SystemGroupCode" />
+      <PropertyRef Name="ComponentGroupCode" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SystemGroupCode" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="ComponentGroupCode" Type="varchar" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DialectText">
+    <Key>
+      <PropertyRef Name="MicrosoftLocaleID" />
+      <PropertyRef Name="TextID" />
+    </Key>
+    <Property Name="MicrosoftLocaleID" Type="int" Nullable="false" />
+    <Property Name="TextID" Type="int" Nullable="false" />
+    <Property Name="LanguageText" Type="varchar(max)" Nullable="false" />
+    <Property Name="ModificationDateTime" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedbyDatabaseLoginName" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="LanguageDialect">
+    <Key>
+      <PropertyRef Name="MicrosoftLocaleID" />
+    </Key>
+    <Property Name="MicrosoftLocaleID" Type="int" Nullable="false" />
+    <Property Name="MicrosoftLocaleDescription" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Release">
+    <Key>
+      <PropertyRef Name="ReleaseID" />
+    </Key>
+    <Property Name="ReleaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SystemGroupCode" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="ReleaseCode" Type="varchar" MaxLength="20" />
+    <Property Name="ModelYear" Type="smallint" />
+    <Property Name="VersionNumber" Type="varchar" MaxLength="50" />
+    <Property Name="ReleaseTypeID" Type="int" Nullable="false" />
+    <Property Name="ConnectCapableIndicator" Type="bit" Nullable="false" />
+    <Property Name="MinimumConnectClientVersion" Type="varchar" MaxLength="20" />
+    <Property Name="LastModifiedUserName" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+    <Property Name="ActiveIndicator" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReleaseComponent">
+    <Key>
+      <PropertyRef Name="ComponentGroupCode" />
+      <PropertyRef Name="ReleaseID" />
+      <PropertyRef Name="ComponentNumber" />
+    </Key>
+    <Property Name="ComponentGroupCode" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="ReleaseID" Type="int" Nullable="false" />
+    <Property Name="ComponentNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ComponentNumberSpecWeek" Type="varchar" MaxLength="6" />
+    <Property Name="ReleaseDerivationIndicator" Type="bit" Nullable="false" />
+    <Property Name="LastModifiedUserName" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="ReleaseNote">
+    <Key>
+      <PropertyRef Name="ReleaseID" />
+      <PropertyRef Name="ReleaseNoteTypeCode" />
+    </Key>
+    <Property Name="ReleaseID" Type="int" Nullable="false" />
+    <Property Name="ReleaseNoteTypeCode" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="ReleaseNoteTextID" Type="int" Nullable="false" />
+    <Property Name="LastModifiedUserName" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReleaseNoteType">
+    <Key>
+      <PropertyRef Name="ReleaseNoteTypeCode" />
+    </Key>
+    <Property Name="ReleaseNoteTypeCode" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="ReleaseNoteTypeDescription" Type="varchar" MaxLength="75" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReleaseType">
+    <Key>
+      <PropertyRef Name="ReleaseTypeID" />
+    </Key>
+    <Property Name="ReleaseTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReleaseTypeName" Type="varchar" MaxLength="75" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SystemGroup">
+    <Key>
+      <PropertyRef Name="SystemGroupIdentifier" />
+    </Key>
+    <Property Name="SystemGroupIdentifier" Type="int" Nullable="false" />
+    <Property Name="SystemGroupCode" Type="varchar" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="TextReference">
+    <Key>
+      <PropertyRef Name="TextID" />
+    </Key>
+    <Property Name="TextID" Type="int" Nullable="false" />
+    <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <Association Name="fkDialectTextXLanguageDialect">
+    <End Role="LanguageDialect" Type="Self.LanguageDialect" Multiplicity="1" />
+    <End Role="DialectText" Type="Self.DialectText" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageDialect">
+        <PropertyRef Name="MicrosoftLocaleID" />
+      </Principal>
+      <Dependent Role="DialectText">
+        <PropertyRef Name="MicrosoftLocaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDialectTextXTextReference">
+    <End Role="TextReference" Type="Self.TextReference" Multiplicity="1" />
+    <End Role="DialectText" Type="Self.DialectText" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TextReference">
+        <PropertyRef Name="TextID" />
+      </Principal>
+      <Dependent Role="DialectText">
+        <PropertyRef Name="TextID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseComponentXSoftwareRelease">
+    <End Role="Release" Type="Self.Release" Multiplicity="1" />
+    <End Role="ReleaseComponent" Type="Self.ReleaseComponent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Release">
+        <PropertyRef Name="ReleaseID" />
+      </Principal>
+      <Dependent Role="ReleaseComponent">
+        <PropertyRef Name="ReleaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseNoteXSoftwareRelease">
+    <End Role="Release" Type="Self.Release" Multiplicity="1" />
+    <End Role="ReleaseNote" Type="Self.ReleaseNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Release">
+        <PropertyRef Name="ReleaseID" />
+      </Principal>
+      <Dependent Role="ReleaseNote">
+        <PropertyRef Name="ReleaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseNoteXSoftwareReleaseNoteType">
+    <End Role="ReleaseNoteType" Type="Self.ReleaseNoteType" Multiplicity="1" />
+    <End Role="ReleaseNote" Type="Self.ReleaseNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReleaseNoteType">
+        <PropertyRef Name="ReleaseNoteTypeCode" />
+      </Principal>
+      <Dependent Role="ReleaseNote">
+        <PropertyRef Name="ReleaseNoteTypeCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseNoteXTextReference">
+    <End Role="TextReference" Type="Self.TextReference" Multiplicity="1" />
+    <End Role="ReleaseNote" Type="Self.ReleaseNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TextReference">
+        <PropertyRef Name="TextID" />
+      </Principal>
+      <Dependent Role="ReleaseNote">
+        <PropertyRef Name="ReleaseNoteTextID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseXSoftwareReleaseType">
+    <End Role="ReleaseType" Type="Self.ReleaseType" Multiplicity="1" />
+    <End Role="Release" Type="Self.Release" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReleaseType">
+        <PropertyRef Name="ReleaseTypeID" />
+      </Principal>
+      <Dependent Role="Release">
+        <PropertyRef Name="ReleaseTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POCRCModelStoreContainer">
+    <EntitySet Name="DialectText" EntityType="Self.DialectText" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LanguageDialect" EntityType="Self.LanguageDialect" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Release" EntityType="Self.Release" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReleaseComponent" EntityType="Self.ReleaseComponent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReleaseNote" EntityType="Self.ReleaseNote" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReleaseNoteType" EntityType="Self.ReleaseNoteType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReleaseType" EntityType="Self.ReleaseType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SystemGroup" EntityType="Self.SystemGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TextReference" EntityType="Self.TextReference" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ComponentSystemGroupCode" EntityType="Self.ComponentSystemGroupCode" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ComponentSystemGroupCode].[ID] AS [ID], 
+    [ComponentSystemGroupCode].[SystemGroupCode] AS [SystemGroupCode], 
+    [ComponentSystemGroupCode].[ComponentGroupCode] AS [ComponentGroupCode]
+    FROM [dbo].[ComponentSystemGroupCode] AS [ComponentSystemGroupCode]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fkDialectTextXLanguageDialect" Association="Self.fkDialectTextXLanguageDialect">
+      <End Role="LanguageDialect" EntitySet="LanguageDialect" />
+      <End Role="DialectText" EntitySet="DialectText" />
+    </AssociationSet>
+    <AssociationSet Name="fkDialectTextXTextReference" Association="Self.fkDialectTextXTextReference">
+      <End Role="TextReference" EntitySet="TextReference" />
+      <End Role="DialectText" EntitySet="DialectText" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseComponentXSoftwareRelease" Association="Self.fkSoftwareReleaseComponentXSoftwareRelease">
+      <End Role="Release" EntitySet="Release" />
+      <End Role="ReleaseComponent" EntitySet="ReleaseComponent" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseNoteXSoftwareRelease" Association="Self.fkSoftwareReleaseNoteXSoftwareRelease">
+      <End Role="Release" EntitySet="Release" />
+      <End Role="ReleaseNote" EntitySet="ReleaseNote" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseNoteXSoftwareReleaseNoteType" Association="Self.fkSoftwareReleaseNoteXSoftwareReleaseNoteType">
+      <End Role="ReleaseNoteType" EntitySet="ReleaseNoteType" />
+      <End Role="ReleaseNote" EntitySet="ReleaseNote" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseNoteXTextReference" Association="Self.fkSoftwareReleaseNoteXTextReference">
+      <End Role="TextReference" EntitySet="TextReference" />
+      <End Role="ReleaseNote" EntitySet="ReleaseNote" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseXSoftwareReleaseType" Association="Self.fkSoftwareReleaseXSoftwareReleaseType">
+      <End Role="ReleaseType" EntitySet="ReleaseType" />
+      <End Role="Release" EntitySet="Release" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

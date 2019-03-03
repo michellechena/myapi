@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="POCRCModelStoreContainer" CdmEntityContainer="POCRCEntities">
+    <EntitySetMapping Name="DialectTexts">
+      <EntityTypeMapping TypeName="POCRCModel.DialectText">
+        <MappingFragment StoreEntitySet="DialectText">
+          <ScalarProperty Name="MicrosoftLocaleID" ColumnName="MicrosoftLocaleID" />
+          <ScalarProperty Name="TextID" ColumnName="TextID" />
+          <ScalarProperty Name="LanguageText" ColumnName="LanguageText" />
+          <ScalarProperty Name="ModificationDateTime" ColumnName="ModificationDateTime" />
+          <ScalarProperty Name="ModifiedbyDatabaseLoginName" ColumnName="ModifiedbyDatabaseLoginName" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LanguageDialects">
+      <EntityTypeMapping TypeName="POCRCModel.LanguageDialect">
+        <MappingFragment StoreEntitySet="LanguageDialect">
+          <ScalarProperty Name="MicrosoftLocaleID" ColumnName="MicrosoftLocaleID" />
+          <ScalarProperty Name="MicrosoftLocaleDescription" ColumnName="MicrosoftLocaleDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Releases">
+      <EntityTypeMapping TypeName="POCRCModel.Release">
+        <MappingFragment StoreEntitySet="Release">
+          <ScalarProperty Name="ReleaseID" ColumnName="ReleaseID" />
+          <ScalarProperty Name="SystemGroupCode" ColumnName="SystemGroupCode" />
+          <ScalarProperty Name="ReleaseCode" ColumnName="ReleaseCode" />
+          <ScalarProperty Name="ModelYear" ColumnName="ModelYear" />
+          <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+          <ScalarProperty Name="ReleaseTypeID" ColumnName="ReleaseTypeID" />
+          <ScalarProperty Name="ConnectCapableIndicator" ColumnName="ConnectCapableIndicator" />
+          <ScalarProperty Name="MinimumConnectClientVersion" ColumnName="MinimumConnectClientVersion" />
+          <ScalarProperty Name="LastModifiedUserName" ColumnName="LastModifiedUserName" />
+          <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+          <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="ActiveIndicator" ColumnName="ActiveIndicator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReleaseComponents">
+      <EntityTypeMapping TypeName="POCRCModel.ReleaseComponent">
+        <MappingFragment StoreEntitySet="ReleaseComponent">
+          <ScalarProperty Name="ComponentGroupCode" ColumnName="ComponentGroupCode" />
+          <ScalarProperty Name="ReleaseID" ColumnName="ReleaseID" />
+          <ScalarProperty Name="ComponentNumber" ColumnName="ComponentNumber" />
+          <ScalarProperty Name="ComponentNumberSpecWeek" ColumnName="ComponentNumberSpecWeek" />
+          <ScalarProperty Name="ReleaseDerivationIndicator" ColumnName="ReleaseDerivationIndicator" />
+          <ScalarProperty Name="LastModifiedUserName" ColumnName="LastModifiedUserName" />
+          <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+          <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReleaseNotes">
+      <EntityTypeMapping TypeName="POCRCModel.ReleaseNote">
+        <MappingFragment StoreEntitySet="ReleaseNote">
+          <ScalarProperty Name="ReleaseID" ColumnName="ReleaseID" />
+          <ScalarProperty Name="ReleaseNoteTypeCode" ColumnName="ReleaseNoteTypeCode" />
+          <ScalarProperty Name="ReleaseNoteTextID" ColumnName="ReleaseNoteTextID" />
+          <ScalarProperty Name="LastModifiedUserName" ColumnName="LastModifiedUserName" />
+          <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+          <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReleaseNoteTypes">
+      <EntityTypeMapping TypeName="POCRCModel.ReleaseNoteType">
+        <MappingFragment StoreEntitySet="ReleaseNoteType">
+          <ScalarProperty Name="ReleaseNoteTypeCode" ColumnName="ReleaseNoteTypeCode" />
+          <ScalarProperty Name="ReleaseNoteTypeDescription" ColumnName="ReleaseNoteTypeDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReleaseTypes">
+      <EntityTypeMapping TypeName="POCRCModel.ReleaseType">
+        <MappingFragment StoreEntitySet="ReleaseType">
+          <ScalarProperty Name="ReleaseTypeID" ColumnName="ReleaseTypeID" />
+          <ScalarProperty Name="ReleaseTypeName" ColumnName="ReleaseTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemGroups">
+      <EntityTypeMapping TypeName="POCRCModel.SystemGroup">
+        <MappingFragment StoreEntitySet="SystemGroup">
+          <ScalarProperty Name="SystemGroupIdentifier" ColumnName="SystemGroupIdentifier" />
+          <ScalarProperty Name="SystemGroupCode" ColumnName="SystemGroupCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TextReferences">
+      <EntityTypeMapping TypeName="POCRCModel.TextReference">
+        <MappingFragment StoreEntitySet="TextReference">
+          <ScalarProperty Name="TextID" ColumnName="TextID" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComponentSystemGroupCodes">
+      <EntityTypeMapping TypeName="POCRCModel.ComponentSystemGroupCode">
+        <MappingFragment StoreEntitySet="ComponentSystemGroupCode">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SystemGroupCode" ColumnName="SystemGroupCode" />
+          <ScalarProperty Name="ComponentGroupCode" ColumnName="ComponentGroupCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POCRCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DialectText">
+    <Key>
+      <PropertyRef Name="MicrosoftLocaleID" />
+      <PropertyRef Name="TextID" />
+    </Key>
+    <Property Name="MicrosoftLocaleID" Type="Int32" Nullable="false" />
+    <Property Name="TextID" Type="Int32" Nullable="false" />
+    <Property Name="LanguageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ModificationDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedbyDatabaseLoginName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="LanguageDialect" Relationship="Self.fkDialectTextXLanguageDialect" FromRole="DialectText" ToRole="LanguageDialect" />
+    <NavigationProperty Name="TextReference" Relationship="Self.fkDialectTextXTextReference" FromRole="DialectText" ToRole="TextReference" />
+  </EntityType>
+  <EntityType Name="LanguageDialect">
+    <Key>
+      <PropertyRef Name="MicrosoftLocaleID" />
+    </Key>
+    <Property Name="MicrosoftLocaleID" Type="Int32" Nullable="false" />
+    <Property Name="MicrosoftLocaleDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="DialectTexts" Relationship="Self.fkDialectTextXLanguageDialect" FromRole="LanguageDialect" ToRole="DialectText" />
+  </EntityType>
+  <EntityType Name="Release">
+    <Key>
+      <PropertyRef Name="ReleaseID" />
+    </Key>
+    <Property Name="ReleaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SystemGroupCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReleaseCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ModelYear" Type="Int16" />
+    <Property Name="VersionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ReleaseTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ConnectCapableIndicator" Type="Boolean" Nullable="false" />
+    <Property Name="MinimumConnectClientVersion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastModifiedUserName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ActiveIndicator" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ReleaseComponents" Relationship="Self.fkSoftwareReleaseComponentXSoftwareRelease" FromRole="Release" ToRole="ReleaseComponent" />
+    <NavigationProperty Name="ReleaseType" Relationship="Self.fkSoftwareReleaseXSoftwareReleaseType" FromRole="Release" ToRole="ReleaseType" />
+  </EntityType>
+  <EntityType Name="ReleaseComponent">
+    <Key>
+      <PropertyRef Name="ComponentGroupCode" />
+      <PropertyRef Name="ReleaseID" />
+      <PropertyRef Name="ComponentNumber" />
+    </Key>
+    <Property Name="ComponentGroupCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReleaseID" Type="Int32" Nullable="false" />
+    <Property Name="ComponentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ComponentNumberSpecWeek" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="ReleaseDerivationIndicator" Type="Boolean" Nullable="false" />
+    <Property Name="LastModifiedUserName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Release" Relationship="Self.fkSoftwareReleaseComponentXSoftwareRelease" FromRole="ReleaseComponent" ToRole="Release" />
+  </EntityType>
+  <EntityType Name="ReleaseNote">
+    <Key>
+      <PropertyRef Name="ReleaseID" />
+      <PropertyRef Name="ReleaseNoteTypeCode" />
+      <PropertyRef Name="ReleaseNoteTextID" />
+    </Key>
+    <Property Name="ReleaseID" Type="Int32" Nullable="false" />
+    <Property Name="ReleaseNoteTypeCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReleaseNoteTextID" Type="Int32" Nullable="false" />
+    <Property Name="LastModifiedUserName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="ReleaseNoteType">
+    <Key>
+      <PropertyRef Name="ReleaseNoteTypeCode" />
+    </Key>
+    <Property Name="ReleaseNoteTypeCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReleaseNoteTypeDescription" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReleaseType">
+    <Key>
+      <PropertyRef Name="ReleaseTypeID" />
+    </Key>
+    <Property Name="ReleaseTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReleaseTypeName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Releases" Relationship="Self.fkSoftwareReleaseXSoftwareReleaseType" FromRole="ReleaseType" ToRole="Release" />
+  </EntityType>
+  <EntityType Name="SystemGroup">
+    <Key>
+      <PropertyRef Name="SystemGroupIdentifier" />
+    </Key>
+    <Property Name="SystemGroupIdentifier" Type="Int32" Nullable="false" />
+    <Property Name="SystemGroupCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TextReference">
+    <Key>
+      <PropertyRef Name="TextID" />
+    </Key>
+    <Property Name="TextID" Type="Int32" Nullable="false" />
+    <Property Name="timestamp" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="DialectTexts" Relationship="Self.fkDialectTextXTextReference" FromRole="TextReference" ToRole="DialectText" />
+  </EntityType>
+  <EntityType Name="ComponentSystemGroupCode">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="SystemGroupCode" />
+      <PropertyRef Name="ComponentGroupCode" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SystemGroupCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ComponentGroupCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="fkDialectTextXLanguageDialect">
+    <End Role="LanguageDialect" Type="Self.LanguageDialect" Multiplicity="1" />
+    <End Role="DialectText" Type="Self.DialectText" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LanguageDialect">
+        <PropertyRef Name="MicrosoftLocaleID" />
+      </Principal>
+      <Dependent Role="DialectText">
+        <PropertyRef Name="MicrosoftLocaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkDialectTextXTextReference">
+    <End Role="TextReference" Type="Self.TextReference" Multiplicity="1" />
+    <End Role="DialectText" Type="Self.DialectText" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TextReference">
+        <PropertyRef Name="TextID" />
+      </Principal>
+      <Dependent Role="DialectText">
+        <PropertyRef Name="TextID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseComponentXSoftwareRelease">
+    <End Role="Release" Type="Self.Release" Multiplicity="1" />
+    <End Role="ReleaseComponent" Type="Self.ReleaseComponent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Release">
+        <PropertyRef Name="ReleaseID" />
+      </Principal>
+      <Dependent Role="ReleaseComponent">
+        <PropertyRef Name="ReleaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkSoftwareReleaseXSoftwareReleaseType">
+    <End Role="ReleaseType" Type="Self.ReleaseType" Multiplicity="1" />
+    <End Role="Release" Type="Self.Release" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReleaseType">
+        <PropertyRef Name="ReleaseTypeID" />
+      </Principal>
+      <Dependent Role="Release">
+        <PropertyRef Name="ReleaseTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POCRCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DialectTexts" EntityType="Self.DialectText" />
+    <EntitySet Name="LanguageDialects" EntityType="Self.LanguageDialect" />
+    <EntitySet Name="Releases" EntityType="Self.Release" />
+    <EntitySet Name="ReleaseComponents" EntityType="Self.ReleaseComponent" />
+    <EntitySet Name="ReleaseNotes" EntityType="Self.ReleaseNote" />
+    <EntitySet Name="ReleaseNoteTypes" EntityType="Self.ReleaseNoteType" />
+    <EntitySet Name="ReleaseTypes" EntityType="Self.ReleaseType" />
+    <EntitySet Name="SystemGroups" EntityType="Self.SystemGroup" />
+    <EntitySet Name="TextReferences" EntityType="Self.TextReference" />
+    <EntitySet Name="ComponentSystemGroupCodes" EntityType="Self.ComponentSystemGroupCode" />
+    <AssociationSet Name="fkDialectTextXLanguageDialect" Association="Self.fkDialectTextXLanguageDialect">
+      <End Role="LanguageDialect" EntitySet="LanguageDialects" />
+      <End Role="DialectText" EntitySet="DialectTexts" />
+    </AssociationSet>
+    <AssociationSet Name="fkDialectTextXTextReference" Association="Self.fkDialectTextXTextReference">
+      <End Role="TextReference" EntitySet="TextReferences" />
+      <End Role="DialectText" EntitySet="DialectTexts" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseComponentXSoftwareRelease" Association="Self.fkSoftwareReleaseComponentXSoftwareRelease">
+      <End Role="Release" EntitySet="Releases" />
+      <End Role="ReleaseComponent" EntitySet="ReleaseComponents" />
+    </AssociationSet>
+    <AssociationSet Name="fkSoftwareReleaseXSoftwareReleaseType" Association="Self.fkSoftwareReleaseXSoftwareReleaseType">
+      <End Role="ReleaseType" EntitySet="ReleaseTypes" />
+      <End Role="Release" EntitySet="Releases" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
