@@ -13,12 +13,13 @@ using SoftwareReleaseMapping.Common.Models;
 using SoftwareReleaseMapping.Common;
 
 using System.Data.Entity;
+using SoftwareReleaseMapService.DBModels;
 
 namespace SoftwareReleaseMapService.Controllers
 {
     public class ReleaseNotesController : ApiController
     {
-        POCRCEntities _dbEntities = new POCRCEntities();
+        POCRCEntities1 _dbEntities = new POCRCEntities1();
         [HttpGet, Route(ApiConstants.RELEASE_NOTES + @"/{SoftwareReleaseID}" + @"/{Language}" + @"/{SoftwareReleaseNoteTypeCode}")]
         public HttpResponseMessage GetReleaseNotes(string SoftwareReleaseID , string language,string SoftwareReleaseNoteTypeCode)
         {
@@ -54,14 +55,16 @@ namespace SoftwareReleaseMapService.Controllers
             HttpResponseMessage response = Request.CreateResponse();
             try
             {
+                TextReference textReference = new TextReference();
+                textReference.TextID = _dbEntities.TextReferences.Max(m => m.TextID) + 1;
+                _dbEntities.TextReferences.Add(textReference);
+                _dbEntities.SaveChanges();
                 ReleaseNote releaseNoteTemp = _dbEntities.ReleaseNotes.Where(a => a.ReleaseID == softwareReleaseNotes.SoftwareReleaseId
-                                                                            && a.ReleaseNoteTypeCode == softwareReleaseNotes.SoftwareReleaseNoteTypeCode
+                                                                            && a.ReleaseNoteTypeCode == softwareReleaseNotes.SoftwareReleaseNoteTypeCode 
+                                                                            && a.ReleaseNoteTextID == textReference.TextID
                                                                             ).FirstOrDefault();
                 if (releaseNoteTemp == null) {
-                    TextReference textReference = new TextReference();
-                    textReference.TextID = _dbEntities.TextReferences.Max(m => m.TextID) + 1;
-                    _dbEntities.TextReferences.Add(textReference);
-                    _dbEntities.SaveChanges();
+                    
                     ReleaseNote releaseNote = new ReleaseNote()
                     {
                         ReleaseID = softwareReleaseNotes.SoftwareReleaseId,

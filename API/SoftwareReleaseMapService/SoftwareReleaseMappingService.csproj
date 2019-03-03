@@ -202,9 +202,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="ComponentSystemGroupCode.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\MetaDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -212,14 +209,53 @@
     <Compile Include="Controllers\ReleaseNotesController.cs" />
     <Compile Include="Controllers\SoftwareReleaseMappingController.cs" />
     <Compile Include="Controllers\VehicleSystemController.cs" />
-    <Compile Include="DialectText.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
+    <Compile Include="DBModels\ComponentSystemGroupCode.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\DialectText.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\LanguageDialect.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\POCRCEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POCRCEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\POCRCEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\POCRCEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POCRCEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\Release.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\ReleaseComponent.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\ReleaseNote.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\ReleaseNoteType.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\ReleaseType.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\SystemGroup.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\TextReference.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="LanguageDialect.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ChassisAndVehicleSystemCode.cs" />
     <Compile Include="Models\SoftwareComponentNumber.cs" />
@@ -229,72 +265,36 @@
     <Compile Include="Models\SoftwareReleaseNote.cs" />
     <Compile Include="Models\SoftwareReleaseNoteTypesLanguageLocale.cs" />
     <Compile Include="Models\SoftwareReleaseNoteTypes.cs" />
-    <Compile Include="POCRC.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>POCRC.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="POCRC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="POCRC.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>POCRC.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Release.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReleaseComponent.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReleaseNote.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReleaseNoteType.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ReleaseType.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SystemGroup.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TextReference.cs">
-      <DependentUpon>POCRC.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="DBModels\POCRCEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POCRCEntities.edmx</DependentUpon>
+      <LastGenOutput>POCRCEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBModels\POCRCEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>POCRCEntities.edmx</DependentUpon>
+      <LastGenOutput>POCRCEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="POCRC.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>POCRC.edmx</DependentUpon>
-      <LastGenOutput>POCRC.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="POCRC.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>POCRC.edmx</DependentUpon>
-      <LastGenOutput>POCRC.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="ApplicationInsights.config" />
-    <EntityDeploy Include="POCRC.edmx">
+    <EntityDeploy Include="DBModels\POCRCEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>POCRC.Designer.cs</LastGenOutput>
+      <LastGenOutput>POCRCEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="POCRC.edmx.diagram">
-      <DependentUpon>POCRC.edmx</DependentUpon>
+    <Content Include="DBModels\POCRCEntities.edmx.diagram">
+      <DependentUpon>POCRCEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

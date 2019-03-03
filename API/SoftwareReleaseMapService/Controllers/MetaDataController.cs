@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SoftwareReleaseMapping.Common;
 using SoftwareReleaseMapping.Common.Models;
-
+using SoftwareReleaseMapService.DBModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace SoftwareReleaseMapService.Controllers
     public class MetaDataController : ApiController
     {
 
-        POCRCEntities _dbEntities = new POCRCEntities(); 
+        POCRCEntities1 _dbEntities = new POCRCEntities1(); 
         public MetaDataController()
         {
         }

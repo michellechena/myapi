@@ -10,14 +10,14 @@ using System.Web;
 using System.Web.Http;
 using Newtonsoft.Json;
 using SoftwareReleaseMapping.Common;
-
 using System.Data.Entity;
+using SoftwareReleaseMapService.DBModels;
 
 namespace SoftwareReleaseMapService.Controllers
 {
     public class SoftwareReleaseDefinitionController : ApiController
     {
-        POCRCEntities _dbEntities = new POCRCEntities();
+        POCRCEntities1 _dbEntities = new POCRCEntities1();
         public SoftwareReleaseDefinitionController()
         {
         }
