@@ -1,0 +1,85 @@
+2019-02-19 15:03:36.697 -08:00 [Debug] starting log...2/19/2019 11:03:36 PM 
+2019-02-19 15:03:36.727 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 16:09:36.446 -08:00 [Debug] starting log...2/20/2019 12:09:36 AM 
+2019-02-19 16:09:36.462 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 16:11:02.202 -08:00 [Error] 
+System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 50 - Local Database Runtime error occurred. Specified LocalDB instance name is invalid.
+)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at Microsoft.Practices.EnterpriseLibrary.Data.Database.GetNewOpenConnection()
+   at Microsoft.Practices.EnterpriseLibrary.Data.Database.GetWrappedConnection()
+   at Microsoft.Practices.EnterpriseLibrary.Data.Database.LoadDataSet(DbCommand command, DataSet dataSet, String[] tableNames)
+   at Microsoft.Practices.EnterpriseLibrary.Data.Database.LoadDataSet(DbCommand command, DataSet dataSet, String tableName)
+   at Microsoft.Practices.EnterpriseLibrary.Data.Database.ExecuteDataSet(DbCommand command)
+   at SoftwareReleaseMapping.Data.Sql.DataAccess.ExecuteDataSet(SqlCommand cmd) in C:\VSD\ITD\VehicleSoftwareSystems\VehicleOTA\Dev\Trunk\Web service\SoftwareReleaseMapping\SoftwareReleaseMapService\SoftwareReleaseMapping.Data.Sql\DataAccess.cs:line 198
+   at SoftwareReleaseMapping.Data.SoftwareReleaseCodeDataRepository.GetAllSoftwareReleaseData(Int32 softwareReleaseID) in C:\VSD\ITD\VehicleSoftwareSystems\VehicleOTA\Dev\Trunk\Web service\SoftwareReleaseMapping\SoftwareReleaseMapService\SoftwareReleaseMapping.Data\SoftwareReleaseCodeDataRepository.cs:line 145
+   at SoftwareReleaseMapping.Services.ReleaseDefinitionService.GetSoftwareReleaseDefinitions(Int32 softwareReleaseID) in C:\VSD\ITD\VehicleSoftwareSystems\VehicleOTA\Dev\Trunk\Web service\SoftwareReleaseMapping\SoftwareReleaseMapService\SoftwareReleaseMapping.Services\ReleaseDefinitionService.cs:line 107
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1983577829,State:0,Class:20
+2019-02-19 16:11:02.303 -08:00 [Error] System.ArgumentException: Source property was not set before writing to the event log.
+   at System.Diagnostics.EventLogInternal.WriteEntry(String message, EventLogEntryType type, Int32 eventID, Int16 category, Byte[] rawData)
+   at System.Diagnostics.EventLog.WriteEntry(String source, String message, EventLogEntryType type, Int32 eventID, Int16 category, Byte[] rawData)
+   at System.Diagnostics.EventLog.WriteEntry(String source, String message, EventLogEntryType type)
+   at SoftwareReleaseMapping.Common.Controller.LogController.Error(Exception exception, String messageTemplate) in C:\VSD\ITD\VehicleSoftwareSystems\VehicleOTA\Dev\Trunk\Web service\SoftwareReleaseMapping\SoftwareReleaseMapService\SoftwareReleaseMap.Common\Controller\LogController.cs:line 951
+2019-02-19 16:11:02.333 -08:00 [Error] 
+System.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 50 - Local Database Runtime error occurred. Specified LocalDB instance name is invalid.
+)
+   at SoftwareReleaseMapping.Services.ReleaseDefinitionService.GetSoftwareReleaseDefinitions(Int32 softwareReleaseID) in C:\VSD\ITD\VehicleSoftwareSystems\VehicleOTA\Dev\Trunk\Web service\SoftwareReleaseMapping\SoftwareReleaseMapService\SoftwareReleaseMapping.Services\ReleaseDefinitionService.cs:line 151
+   at SoftwareReleaseMapService.Controllers.SoftwareReleaseDefinitionController.GetSoftwareReleaseDefinitionsBySoftwareReleaseID(Int32 SoftwareReleaseID) in C:\VSD\ITD\VehicleSoftwareSystems\VehicleOTA\Dev\Trunk\Web service\SoftwareReleaseMapping\SoftwareReleaseMapService\SoftwareReleaseMapService\Controllers\SoftwareReleaseDefinitionController.cs:line 65
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1983577829,State:0,Class:20
+2019-02-19 16:11:02.369 -08:00 [Error] System.ArgumentException: Source property was not set before writing to the event log.
+   at System.Diagnostics.EventLogInternal.WriteEntry(String message, EventLogEntryType type, Int32 eventID, Int16 category, Byte[] rawData)
+   at System.Diagnostics.EventLog.WriteEntry(String source, String message, EventLogEntryType type, Int32 eventID, Int16 category, Byte[] rawData)
+   at System.Diagnostics.EventLog.WriteEntry(String source, String message, EventLogEntryType type)
+   at SoftwareReleaseMapping.Common.Controller.LogController.Error(Exception exception, String messageTemplate) in C:\VSD\ITD\VehicleSoftwareSystems\VehicleOTA\Dev\Trunk\Web service\SoftwareReleaseMapping\SoftwareReleaseMapService\SoftwareReleaseMap.Common\Controller\LogController.cs:line 951
+2019-02-19 16:12:02.002 -08:00 [Debug] starting log...2/20/2019 12:12:01 AM 
+2019-02-19 16:12:02.047 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 17:47:06.570 -08:00 [Debug] starting log...2/20/2019 1:47:06 AM 
+2019-02-19 17:47:06.640 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 17:48:42.820 -08:00 [Debug] starting log...2/20/2019 1:48:42 AM 
+2019-02-19 17:48:42.858 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 17:56:29.006 -08:00 [Debug] starting log...2/20/2019 1:56:29 AM 
+2019-02-19 17:56:29.035 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 17:59:22.351 -08:00 [Debug] starting log...2/20/2019 1:59:22 AM 
+2019-02-19 17:59:22.388 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 18:02:32.584 -08:00 [Debug] starting log...2/20/2019 2:02:32 AM 
+2019-02-19 18:02:32.614 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 18:13:46.555 -08:00 [Debug] starting log...2/20/2019 2:13:46 AM 
+2019-02-19 18:13:46.578 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 18:17:32.845 -08:00 [Debug] starting log...2/20/2019 2:17:32 AM 
+2019-02-19 18:17:32.874 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 18:33:22.887 -08:00 [Debug] starting log...2/20/2019 2:33:22 AM 
+2019-02-19 18:33:22.921 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 19:32:20.609 -08:00 [Debug] starting log...2/20/2019 3:32:20 AM 
+2019-02-19 19:32:20.633 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 19:36:16.974 -08:00 [Debug] starting log...2/20/2019 3:36:16 AM 
+2019-02-19 19:36:16.993 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 19:41:47.628 -08:00 [Debug] starting log...2/20/2019 3:41:47 AM 
+2019-02-19 19:41:47.667 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 19:47:58.601 -08:00 [Debug] starting log...2/20/2019 3:47:58 AM 
+2019-02-19 19:47:58.630 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 19:53:44.743 -08:00 [Debug] starting log...2/20/2019 3:53:44 AM 
+2019-02-19 19:53:44.783 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 19:55:37.620 -08:00 [Debug] starting log...2/20/2019 3:55:37 AM 
+2019-02-19 19:55:37.638 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 20:03:37.294 -08:00 [Debug] starting log...2/20/2019 4:03:37 AM 
+2019-02-19 20:03:37.346 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 20:09:28.502 -08:00 [Debug] starting log...2/20/2019 4:09:28 AM 
+2019-02-19 20:09:28.523 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 20:38:35.054 -08:00 [Debug] starting log...2/20/2019 4:38:35 AM 
+2019-02-19 20:38:35.079 -08:00 [Information] SoftwareReleaseServiceStarted
+2019-02-19 20:58:16.715 -08:00 [Debug] starting log...2/20/2019 4:58:16 AM 
+2019-02-19 20:58:16.733 -08:00 [Information] SoftwareReleaseServiceStarted

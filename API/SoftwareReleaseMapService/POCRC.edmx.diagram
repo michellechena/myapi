@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a32cd0d1e0024ac9a9322bab82f3541c" Name="Diagram1">
+        <EntityTypeShape EntityType="POCRCModel.DialectText" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.LanguageDialect" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.Release" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.ReleaseComponent" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.ReleaseNote" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.ReleaseNoteType" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.ReleaseType" Width="1.5" PointX="1.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.SystemGroup" Width="1.5" PointX="8.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.TextReference" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="POCRCModel.ComponentSystemGroupCode" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="POCRCModel.fkDialectTextXLanguageDialect" ManuallyRouted="false" />
+        <AssociationConnector Association="POCRCModel.fkDialectTextXTextReference" ManuallyRouted="false" />
+        <AssociationConnector Association="POCRCModel.fkSoftwareReleaseComponentXSoftwareRelease" ManuallyRouted="false" />
+        <AssociationConnector Association="POCRCModel.fkSoftwareReleaseNoteXSoftwareRelease" ManuallyRouted="false" />
+        <AssociationConnector Association="POCRCModel.fkSoftwareReleaseXSoftwareReleaseType" ManuallyRouted="false" />
+        <AssociationConnector Association="POCRCModel.fkSoftwareReleaseNoteXSoftwareReleaseNoteType" ManuallyRouted="false" />
+        <AssociationConnector Association="POCRCModel.fkSoftwareReleaseNoteXTextReference" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
