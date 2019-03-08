@@ -12,14 +12,19 @@ namespace SoftwareReleaseMapService.DBModels
     using System;
     using System.Collections.Generic;
     
-    public partial class POCUser
+    public partial class POCUserRole
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public int RoleId { get; set; }
-        public System.DateTime CreatedDateTime { get; set; }
-        public System.DateTime LastModifiedDateTime { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public POCUserRole()
+        {
+            this.POCUsers = new HashSet<POCUser>();
+        }
     
-        public virtual POCUserRole POCUserRole { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+        public int Permission { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<POCUser> POCUsers { get; set; }
     }
 }

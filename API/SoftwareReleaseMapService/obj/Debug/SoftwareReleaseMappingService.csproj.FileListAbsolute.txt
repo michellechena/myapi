@@ -145,6 +145,7 @@ C:\UI\2-28-2019\28_02_19\API\SoftwareReleaseMapService\bin\System.Web.WebPages.R
 C:\UI\2-28-2019\28_02_19\API\SoftwareReleaseMapService\bin\Antlr3.Runtime.pdb
 C:\UI\2-28-2019\28_02_19\API\SoftwareReleaseMapService\bin\Microsoft.ApplicationInsights.xml
 C:\UI\2-28-2019\28_02_19\API\SoftwareReleaseMapService\bin\Microsoft.AI.DependencyCollector.xml
+C:\UI\2-28-2019\28_02_19\API\SoftwareReleaseMapService\obj\Debug\SoftwareReleaseMappingService.csprojAssemblyReference.cache
 C:\UI\2-28-2019\28_02_19\API\SoftwareReleaseMapService\obj\Debug\SoftwareReleaseMappingService.csproj.CoreCompileInputs.cache
 C:\UI\2-28-2019\28_02_19\API\SoftwareReleaseMapService\obj\Debug\SoftwareReleaseMappingService.csproj.CopyComplete
 C:\UI\2-28-2019\28_02_19\API\SoftwareReleaseMapService\obj\Debug\SoftwareReleaseMapService.dll

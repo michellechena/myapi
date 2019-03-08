@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Http;
+using SoftwareReleaseMapService.DBModels;
 
 
 namespace SoftwareReleaseMapService.Controllers
@@ -69,7 +70,42 @@ namespace SoftwareReleaseMapService.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, softwareReleaseNoteTypesLanguageLocale); 
         }
 
+        // GET: SoftwareReleaseDefinition for a specific SoftwareReleaseID
+        [HttpGet, Route(ApiConstants.POC_USER_PERMISSION + @"/{UserName}")]
+        public HttpResponseMessage GetPOCUserPermissionByUserName(string UserName)
+        {
+            HttpResponseMessage response = Request.CreateResponse();
+			SoftwareReleaseMapService.DBModels.POCUser pocUser = new SoftwareReleaseMapService.DBModels.POCUser();
+            try
+            {
+                pocUser = (from pr in _dbEntities.POCUsers
+                           join pu in _dbEntities.POCUserRoles on pr.RoleId equals pu.RoleId
+                           where pr.UserName == UserName
+                           select new  
+                           {
+                               Id = pr.Id,
+                               Permission = pu.Permission,
+                               UserName = pr.UserName
+                           }).AsEnumerable().Select(s=> new POCUser()
+                           {
+                               Id = s.Id,
+                               Permission = s.Permission,
+                               UserName = s.UserName
+                           }).FirstOrDefault();
+                if (pocUser != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, pocUser);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                response.Content = new StringContent("[]");
+                response.StatusCode = HttpStatusCode.InternalServerError;
+            }
 
+            return response;
+        }
 
     }
 }

@@ -205,6 +205,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\MetaDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\POCUserController.cs" />
     <Compile Include="Controllers\SoftwareReleaseDefinitionController.cs" />
     <Compile Include="Controllers\ReleaseNotesController.cs" />
     <Compile Include="Controllers\SoftwareReleaseMappingController.cs" />
@@ -233,6 +234,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>POCRCEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DBModels\POCUser.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\POCUserRole.cs">
+      <DependentUpon>POCRCEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModels\Release.cs">
       <DependentUpon>POCRCEntities.tt</DependentUpon>
     </Compile>
@@ -258,7 +265,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChassisAndVehicleSystemCode.cs" />
+    <Compile Include="Models\ComponentNumber.cs" />
+    <Compile Include="Models\POCUser.cs" />
     <Compile Include="Models\SoftwareComponentNumber.cs" />
+    <Compile Include="Models\SoftwarePOCUserRole.cs" />
     <Compile Include="Models\SoftwareReleaseComponent.cs" />
     <Compile Include="Models\SoftwareReleaseDefinition.cs" />
     <Compile Include="Models\SoftwareReleaseMap.cs" />

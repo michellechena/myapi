@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,5 +29,8 @@ namespace SoftwareReleaseMapping.Common.Models
         public DateTime CreationDateTime { get; set; }
         public string LastModifiedUserName { get; set; }
         public string RCReleaseNote { get; set; }
+        public int ReleaseNoteTextId { get; set; }
+        public int POCUserPermission { get; set; }
     }
 }
+    

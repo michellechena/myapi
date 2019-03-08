@@ -27,6 +27,24 @@
     <Property Name="MicrosoftLocaleID" Type="int" Nullable="false" />
     <Property Name="MicrosoftLocaleDescription" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
+  <EntityType Name="POCUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="datetime" Nullable="false" />
+    <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="POCUserRole">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Permission" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Release">
     <Key>
       <PropertyRef Name="ReleaseID" />
@@ -102,6 +120,18 @@
     <Property Name="TextID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="timestamp" Type="timestamp" StoreGeneratedPattern="Computed" />
   </EntityType>
+  <Association Name="FK_POCUser_POCUserRole">
+    <End Role="POCUserRole" Type="Self.POCUserRole" Multiplicity="1" />
+    <End Role="POCUser" Type="Self.POCUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POCUserRole">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="POCUser">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fkDialectTextXLanguageDialect">
     <End Role="LanguageDialect" Type="Self.LanguageDialect" Multiplicity="1" />
     <End Role="DialectText" Type="Self.DialectText" Multiplicity="*" />
@@ -190,6 +220,8 @@
     <EntitySet Name="ComponentSystemGroupCode" EntityType="Self.ComponentSystemGroupCode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DialectText" EntityType="Self.DialectText" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LanguageDialect" EntityType="Self.LanguageDialect" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POCUser" EntityType="Self.POCUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POCUserRole" EntityType="Self.POCUserRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Release" EntityType="Self.Release" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReleaseComponent" EntityType="Self.ReleaseComponent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReleaseNote" EntityType="Self.ReleaseNote" Schema="dbo" store:Type="Tables" />
@@ -197,6 +229,10 @@
     <EntitySet Name="ReleaseType" EntityType="Self.ReleaseType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SystemGroup" EntityType="Self.SystemGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TextReference" EntityType="Self.TextReference" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_POCUser_POCUserRole" Association="Self.FK_POCUser_POCUserRole">
+      <End Role="POCUserRole" EntitySet="POCUserRole" />
+      <End Role="POCUser" EntitySet="POCUser" />
+    </AssociationSet>
     <AssociationSet Name="fkDialectTextXLanguageDialect" Association="Self.fkDialectTextXLanguageDialect">
       <End Role="LanguageDialect" EntitySet="LanguageDialect" />
       <End Role="DialectText" EntitySet="DialectText" />

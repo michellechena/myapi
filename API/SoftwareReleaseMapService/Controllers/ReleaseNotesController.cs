@@ -11,7 +11,6 @@ using System.Web.Http;
 using Newtonsoft.Json;
 using SoftwareReleaseMapping.Common.Models;
 using SoftwareReleaseMapping.Common;
-
 using System.Data.Entity;
 using SoftwareReleaseMapService.DBModels;
 
@@ -30,15 +29,24 @@ namespace SoftwareReleaseMapService.Controllers
                 if (!string.IsNullOrEmpty(SoftwareReleaseID))
                     softwareReleaseId = Convert.ToInt32(SoftwareReleaseID);
                 int MicrosoftLocaleID = Convert.ToInt32(language);
-                SoftwareReleaseNote softwareReleaseNote = (from dt in _dbEntities.DialectTexts
-                                                           join rn in _dbEntities.ReleaseNotes on dt.TextID equals rn.ReleaseNoteTextID
-                                                           where rn.ReleaseID == softwareReleaseId && rn.ReleaseNoteTypeCode == SoftwareReleaseNoteTypeCode 
-                                                           && dt.MicrosoftLocaleID == MicrosoftLocaleID select new SoftwareReleaseNote {
-                                                               SoftwareReleaseId = rn.ReleaseID,
-                                                               ReleaseNote = dt.LanguageText,
-                                                               SoftwareReleaseNoteTypeCode = rn.ReleaseNoteTypeCode
-                                                           }).FirstOrDefault();
-                return Request.CreateResponse(HttpStatusCode.OK, softwareReleaseNote);
+                List<SoftwareReleaseNote> softwareReleaseNoteList = (from dt in _dbEntities.DialectTexts
+                                                                       join rn in _dbEntities.ReleaseNotes on dt.TextID equals rn.ReleaseNoteTextID
+                                                                       where rn.ReleaseID == softwareReleaseId && rn.ReleaseNoteTypeCode == SoftwareReleaseNoteTypeCode 
+                                                                       && dt.MicrosoftLocaleID == MicrosoftLocaleID select new SoftwareReleaseNote {
+                                                                           SoftwareReleaseId = rn.ReleaseID,
+                                                                           ReleaseNote = dt.LanguageText,
+                                                                           SoftwareReleaseNoteTypeCode = rn.ReleaseNoteTypeCode,
+                                                                           ReleaseNoteTextId = rn.ReleaseNoteTextID
+                                                                       }).OrderByDescending(o=>o.ReleaseNoteTextId).ToList();
+                
+
+                if(softwareReleaseNoteList.Count > 0)
+                {
+                    SoftwareReleaseNote softwareReleaseNote = new SoftwareReleaseNote();
+                    softwareReleaseNote = softwareReleaseNoteList.FirstOrDefault();
+                    return Request.CreateResponse(HttpStatusCode.OK, softwareReleaseNote);
+                }
+                
             }
             catch (Exception ex)
             {

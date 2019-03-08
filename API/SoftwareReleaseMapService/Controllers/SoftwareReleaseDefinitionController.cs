@@ -74,8 +74,8 @@ namespace SoftwareReleaseMapService.Controllers
         }
 
         // GET: SoftwareReleaseDefinition for a specific SoftwareReleaseID
-        [HttpGet, Route(ApiConstants.SOFTWARE_RELEASE_DEFINITIONS + @"/{SoftwareReleaseID}")]
-        public HttpResponseMessage GetSoftwareReleaseDefinitionsBySoftwareReleaseID(int SoftwareReleaseID)
+        [HttpGet, Route(ApiConstants.SOFTWARE_RELEASE_DEFINITIONS + @"/{SoftwareReleaseID}" + @"/{UserName}")]
+        public HttpResponseMessage GetSoftwareReleaseDefinitionsBySoftwareReleaseID(int SoftwareReleaseID, string UserName)
         {
             HttpResponseMessage response = Request.CreateResponse();
             SoftwareReleaseDefinition softwareReleaseDefinition = new SoftwareReleaseDefinition();
@@ -131,6 +131,15 @@ namespace SoftwareReleaseMapService.Controllers
                     softwareReleaseDefinition.SoftwareReleaseNoteTypeCode = releaseNote.SoftwareReleaseNoteTypeCode;
                     softwareReleaseDefinition.SoftwareReleaseNoteTypeCodeLanguageLocale = releaseNote.SoftwareReleaseNoteTypeCodeLanguageLocale;
                     softwareReleaseDefinition.RCReleaseNote = releaseNote.RCReleaseNote;
+                }
+
+                int pocPermission = (from pr in _dbEntities.POCUserRoles
+                                     join pu in _dbEntities.POCUsers on pr.RoleId equals pu.RoleId
+                                     where pu.UserName == UserName
+                                     select pr.Permission).FirstOrDefault();
+                if(pocPermission > 0)
+                {
+                    softwareReleaseDefinition.POCUserPermission = pocPermission;
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, softwareReleaseDefinition);
             }

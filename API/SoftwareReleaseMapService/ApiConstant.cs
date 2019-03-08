@@ -1,10 +1,4 @@
-﻿using System;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SoftwareReleaseMapping.Common
+﻿namespace SoftwareReleaseMapping.Common
 {
     public class ApiConstants
     {
@@ -19,5 +13,8 @@ namespace SoftwareReleaseMapping.Common
         public const string SOFTWARE_RELEASE_NOTE_TYPES_LANGUAGE_LOCALE = "SoftwareReleaseNoteTypesLanguageLocale";
 
         public const string CHECK_IS_DUPLICATE_SOFTWARE_RELEASE_CODES = "CheckDuplicateSoftwareReleaseCodes";
+        public const string POC_USER_PERMISSION = "POCUserPermission";
+        public const string POC_USER_PERMISSIONS = "POCUserPermissions";
+        public const string POC_USER_ROLES = "POCUserRoles";
     }
 }

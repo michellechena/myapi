@@ -30,6 +30,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="POCUsers">
+      <EntityTypeMapping TypeName="POCRCModel.POCUser">
+        <MappingFragment StoreEntitySet="POCUser">
+          <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+          <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="POCUserRoles">
+      <EntityTypeMapping TypeName="POCRCModel.POCUserRole">
+        <MappingFragment StoreEntitySet="POCUserRole">
+          <ScalarProperty Name="Permission" ColumnName="Permission" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Releases">
       <EntityTypeMapping TypeName="POCRCModel.Release">
         <MappingFragment StoreEntitySet="Release">

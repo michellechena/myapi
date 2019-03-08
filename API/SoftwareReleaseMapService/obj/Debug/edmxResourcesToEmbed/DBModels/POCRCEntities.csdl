@@ -4,6 +4,8 @@
     <EntitySet Name="ComponentSystemGroupCodes" EntityType="POCRCModel.ComponentSystemGroupCode" />
     <EntitySet Name="DialectTexts" EntityType="POCRCModel.DialectText" />
     <EntitySet Name="LanguageDialects" EntityType="POCRCModel.LanguageDialect" />
+    <EntitySet Name="POCUsers" EntityType="POCRCModel.POCUser" />
+    <EntitySet Name="POCUserRoles" EntityType="POCRCModel.POCUserRole" />
     <EntitySet Name="Releases" EntityType="POCRCModel.Release" />
     <EntitySet Name="ReleaseComponents" EntityType="POCRCModel.ReleaseComponent" />
     <EntitySet Name="ReleaseNotes" EntityType="POCRCModel.ReleaseNote" />
@@ -18,6 +20,10 @@
     <AssociationSet Name="fkDialectTextXTextReference" Association="POCRCModel.fkDialectTextXTextReference">
       <End Role="TextReference" EntitySet="TextReferences" />
       <End Role="DialectText" EntitySet="DialectTexts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_POCUser_POCUserRole" Association="POCRCModel.FK_POCUser_POCUserRole">
+      <End Role="POCUserRole" EntitySet="POCUserRoles" />
+      <End Role="POCUser" EntitySet="POCUsers" />
     </AssociationSet>
     <AssociationSet Name="fkSoftwareReleaseComponentXSoftwareRelease" Association="POCRCModel.fkSoftwareReleaseComponentXSoftwareRelease">
       <End Role="Release" EntitySet="Releases" />
@@ -69,6 +75,26 @@
     <Property Name="MicrosoftLocaleID" Type="Int32" Nullable="false" />
     <Property Name="MicrosoftLocaleDescription" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DialectTexts" Relationship="POCRCModel.fkDialectTextXLanguageDialect" FromRole="LanguageDialect" ToRole="DialectText" />
+  </EntityType>
+  <EntityType Name="POCUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="POCUserRole" Relationship="POCRCModel.FK_POCUser_POCUserRole" FromRole="POCUser" ToRole="POCUserRole" />
+  </EntityType>
+  <EntityType Name="POCUserRole">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Permission" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="POCUsers" Relationship="POCRCModel.FK_POCUser_POCUserRole" FromRole="POCUserRole" ToRole="POCUser" />
   </EntityType>
   <EntityType Name="Release">
     <Key>
@@ -177,6 +203,18 @@
       </Principal>
       <Dependent Role="DialectText">
         <PropertyRef Name="TextID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_POCUser_POCUserRole">
+    <End Type="POCRCModel.POCUserRole" Role="POCUserRole" Multiplicity="1" />
+    <End Type="POCRCModel.POCUser" Role="POCUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="POCUserRole">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="POCUser">
+        <PropertyRef Name="RoleId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -15,6 +15,7 @@ namespace SoftwareReleaseMapping.Common.Models
         public string LastModifiedUserName { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public DateTime LastModifiedDateTime { get; set; }
+        public int ReleaseNoteTextId { get; set; }
 
     }
 

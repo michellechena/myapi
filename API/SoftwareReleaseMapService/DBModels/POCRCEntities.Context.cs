@@ -28,6 +28,8 @@ namespace SoftwareReleaseMapService.DBModels
         public virtual DbSet<ComponentSystemGroupCode> ComponentSystemGroupCodes { get; set; }
         public virtual DbSet<DialectText> DialectTexts { get; set; }
         public virtual DbSet<LanguageDialect> LanguageDialects { get; set; }
+        public virtual DbSet<POCUser> POCUsers { get; set; }
+        public virtual DbSet<POCUserRole> POCUserRoles { get; set; }
         public virtual DbSet<Release> Releases { get; set; }
         public virtual DbSet<ReleaseComponent> ReleaseComponents { get; set; }
         public virtual DbSet<ReleaseNote> ReleaseNotes { get; set; }
